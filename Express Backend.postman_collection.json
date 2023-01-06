@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "96d18d40-86d6-4731-9293-9ba0feaf1bfa",
+		"name": "Express Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24727247"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Cristiano\",\n    \"lastName\": \"Ronaldo\",\n    \"email\": \"ano@seas.upenn.edu\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/signup",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"pranshuk@seas.upenn.edu\",\n    \"password\" : \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/signin/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"signin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Picture Upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"296d3369-fe9d-414f-a272-b73314bf5ab3\",\n    \"profilePicture\": \"YUDFHFUHA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/upload/profilePicture",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"upload",
+						"profilePicture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Biography",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"9aef2c24-3aab-41ab-8415-b6ea68780141\",\n    \"biography\" : \"Graduate Student | Philadelphia\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/upload/biography",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"upload",
+						"biography"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"9aef2c24-3aab-41ab-8415-b6ea68780141\",\n    \"userName\" : \"PranshuKumar\",\n    \"caption\": \"Beautiful Sunset\",\n    \"data\": \"qwertyuiop\",\n    \"type\": \"image/jpg\",\n    \"tagged\" : [\"5bb28c80-dd34-4bf3-a3be-ffac3eadffba\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/upload/post",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"upload",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"postId\" : \"fce45e88-0a5d-480d-ac37-94b0f43faffe\",\n    \"userId\" : \"9aef2c24-3aab-41ab-8415-b6ea68780141\",\n    \"userName\" : \"PranshuKumar\",\n    \"commentText\" : \"Random\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/comment",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"commentText\" : \"This is not a random picture, it is a good picture2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/comment/:commentId",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "commentId",
+							"value": "6e41fa88-2377-4de5-b2f4-c057be4c0cf4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Caption",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"postId\" : \"fce45e88-0a5d-480d-ac37-94b0f43faffe\",\n    \"caption\" : \"Edited Caption Through Postman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/post/updateCaption",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"post",
+						"updateCaption"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/comment/:commentId",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Post's All Comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/comment?postId=fce45e88-0a5d-480d-ac37-94b0f43faffe",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"comment"
+					],
+					"query": [
+						{
+							"key": "postId",
+							"value": "fce45e88-0a5d-480d-ac37-94b0f43faffe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/user?userId=\"5bb28c80-dd34-4bf3-a3be-ffac3eadffba\"",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "\"5bb28c80-dd34-4bf3-a3be-ffac3eadffba\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Follow Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"5bb28c80-dd34-4bf3-a3be-ffac3eadffba\",\r\n    \"followId\" : \"9aef2c24-3aab-41ab-8415-b6ea68780141\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/follow",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"follow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A User's Following Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/follow?userId=9aef2c24-3aab-41ab-8415-b6ea68780141",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"follow"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9aef2c24-3aab-41ab-8415-b6ea68780141"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A User's Follower Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/follow?followId=9aef2c24-3aab-41ab-8415-b6ea68780141",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"follow"
+					],
+					"query": [
+						{
+							"key": "followId",
+							"value": "9aef2c24-3aab-41ab-8415-b6ea68780141"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Follow Data's Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/follow?userId=9aef2c24-3aab-41ab-8415-b6ea68780141&followId=4c85ef5a-d40f-4c46-9006-76bda73e5785",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"follow"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9aef2c24-3aab-41ab-8415-b6ea68780141"
+						},
+						{
+							"key": "followId",
+							"value": "4c85ef5a-d40f-4c46-9006-76bda73e5785"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Follow Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/follow",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"follow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Follow Data",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/follow/fe3efd6d-f3c5-431e-bac3-70da3c3f5c75",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"follow",
+						"fe3efd6d-f3c5-431e-bac3-70da3c3f5c75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts(Activity feed)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/post",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By PID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/post/f50643b7-ba30-43f9-be72-9c846ae89311",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"post",
+						"f50643b7-ba30-43f9-be72-9c846ae89311"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "default"
+		}
+	]
+}

@@ -1,0 +1,726 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PENNSTAGRAM API",
+    "description": "This is the REST API documentation for Group 22's photo/video sharing app",
+    "contact": {
+      "email": "syujuan@seas.upenn.edu"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "retrieves all the users",
+        "description": "Returns a list of all the users in the platform",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in the query"
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a new user",
+        "description": "Adds a user to the database",
+        "operationId": "addUser",
+        "requestBody": {
+          "description": "user to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/users_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "put": {
+        "summary": "update a user informatiomn",
+        "description": "Update the information related to a user",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The user's ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "new user info",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user_id_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "user updated"
+          },
+          "400": {
+            "description": "invalid user id"
+          }
+        }
+      }
+    },
+    "/user/follow": {
+      "get": {
+        "summary": "retrieves all users the logged in user follows",
+        "operationId": "getWhetherFollow",
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in the query"
+          }
+        }
+      },
+      "post": {
+        "summary": "logged in user follows new user",
+        "description": "Adds a new following mapping",
+        "requestBody": {
+          "description": "user id to follow",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user_follow_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Follow relationship mapping created"
+          },
+          "404": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/user/follow/{id}": {
+      "get": {
+        "summary": "retrieves whether logged in user follows {id} user",
+        "operationId": "getWhetherFollowParticularUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The user ID whether followed by current user",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in the query"
+          }
+        }
+      }
+    },
+    "/post": {
+      "get": {
+        "summary": "fetch for activity feed",
+        "description": "Returns a list of new activity feeds posted by all the users in the platform.\n",
+        "operationId": "getActivityFeed",
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Posts"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in the query"
+          }
+        }
+      },
+      "post": {
+        "summary": "create a post",
+        "description": "Add a post to the database",
+        "operationId": "addPost",
+        "requestBody": {
+          "description": "post to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/post_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Post created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/post/{postid}": {
+      "put": {
+        "summary": "update a post",
+        "description": "Update the caption of the post in the database",
+        "operationId": "updatePost",
+        "parameters": [
+          {
+            "name": "postid",
+            "in": "path",
+            "description": "The post's id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "new post info",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/post_postid_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "post updated"
+          },
+          "400": {
+            "description": "invalid post id"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete a post",
+        "description": "Delete a post in the database",
+        "operationId": "deletePost",
+        "parameters": [
+          {
+            "name": "postid",
+            "in": "path",
+            "description": "The post's id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post deleted"
+          },
+          "400": {
+            "description": "invalid post id"
+          }
+        }
+      }
+    },
+    "/post/{userid}": {
+      "get": {
+        "summary": "fetch for all the posts owned by a particular user",
+        "description": "Returns a list of posts posted by the user with particular id in the platform.\n",
+        "operationId": "getUserPosts",
+        "parameters": [
+          {
+            "name": "userid",
+            "in": "path",
+            "description": "The post owner's id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Posts"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in the query"
+          }
+        }
+      }
+    },
+    "/comment": {
+      "post": {
+        "summary": "create a new comment",
+        "description": "Add a new comment to a post",
+        "operationId": "addComment",
+        "requestBody": {
+          "description": "Comment to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/comment_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/comment/{commentid}": {
+      "put": {
+        "summary": "update a comment",
+        "description": "Update a comment in a post",
+        "operationId": "updateComment",
+        "parameters": [
+          {
+            "name": "commentid",
+            "in": "path",
+            "description": "The comment's id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Comment to update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/comment_commentid_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comment updated successfully"
+          },
+          "400": {
+            "description": "Couldn't find the comment"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete a comment",
+        "description": "Delete a comment from a post",
+        "operationId": "deleteComment",
+        "parameters": [
+          {
+            "name": "commentid",
+            "in": "path",
+            "description": "The comment's id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment deleted successfully"
+          },
+          "400": {
+            "description": "Couldn't find the comment"
+          }
+        }
+      }
+    },
+    "/comment/{postid}": {
+      "get": {
+        "summary": "Get comments",
+        "description": "Get all comments in a post",
+        "operationId": "getPostComments",
+        "parameters": [
+          {
+            "name": "postid",
+            "in": "path",
+            "description": "The post's id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get post and its comments successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comments"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "post unfounded"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID AutoGenerated",
+            "example": "dashdash3432njsad"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Group"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "twenty-two"
+          },
+          "email": {
+            "type": "string",
+            "example": "group22@upenn.edu"
+          },
+          "password": {
+            "type": "string",
+            "example": "cis557password"
+          },
+          "biography": {
+            "type": "string",
+            "example": "dsadadsa"
+          },
+          "profilePicture": {
+            "type": "object",
+            "example": [
+              "dsad"
+            ]
+          },
+          "accountCreateDate": {
+            "type": "number",
+            "description": "Epoch Value",
+            "example": 413432432423
+          }
+        },
+        "description": "A user is described by their firstName, lastName, email and Password"
+      },
+      "Posts": {
+        "required": [
+          "data",
+          "visibility"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID AutoGenerator",
+            "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "data": {
+            "type": "object",
+            "description": "picture/video to be posted"
+          },
+          "caption": {
+            "type": "string",
+            "example": "hello pennstagram"
+          },
+          "visibility": {
+            "type": "integer",
+            "example": 1
+          },
+          "createTime": {
+            "type": "number"
+          }
+        },
+        "description": "A post is a picture/video + caption combination that user uploaded."
+      },
+      "Comments": {
+        "required": [
+          "commentText"
+        ],
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "type": "string",
+            "description": "UUID AutoGenerator",
+            "example": "examplepostcommentid1"
+          },
+          "commentText": {
+            "type": "string",
+            "description": "Actual content of a comment",
+            "example": "I love CIS 5570"
+          },
+          "commentTime": {
+            "type": "number",
+            "description": "The time when the comment is created",
+            "example": 20220929
+          }
+        },
+        "description": "A comment is a simple text that users left in a post"
+      },
+      "users_body": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_201": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The user ID"
+          }
+        }
+      },
+      "user_id_body": {
+        "type": "object",
+        "properties": {
+          "biography": {
+            "type": "string",
+            "description": "The user's biography"
+          },
+          "profilePicture": {
+            "type": "object"
+          }
+        }
+      },
+      "user_follow_body": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The user's id to follow"
+          }
+        }
+      },
+      "post_body": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "integer"
+          },
+          "userid": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_201_1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The post ID"
+          }
+        }
+      },
+      "post_postid_body": {
+        "type": "object",
+        "properties": {
+          "caption": {
+            "type": "string"
+          },
+          "userid": {
+            "type": "string"
+          }
+        }
+      },
+      "comment_body": {
+        "required": [
+          "commentText",
+          "postId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "commentText": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_201_2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The comment ID"
+          }
+        }
+      },
+      "comment_commentid_body": {
+        "required": [
+          "commentText",
+          "postId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "commentText": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

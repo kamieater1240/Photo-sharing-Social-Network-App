@@ -1,0 +1,67 @@
+.App-logo {
+    position: absolute;
+    font-weight: bold;
+    top: 120px;
+    right : 990px;
+    color: white;
+    display: block;
+    height: 30vmin;
+    width: 30vmin;
+    text-align: center;
+    pointer-events: none;
+}
+
+.User-name {
+    position: absolute;
+    top: 120px;
+    right: 545px;
+    font-size: 40px;
+}
+  
+.Post-number {
+    position: absolute;
+    top: 190px;
+    right: 753px;
+    font-size: 20px;
+}
+  
+.Follower-number {
+    position: absolute;
+    top: 190px;
+    right: 588px;
+    font-size: 20px;
+    cursor: pointer;
+}
+  
+.Following-number {
+    position: absolute;
+    top: 190px;
+    right: 413px;
+    font-size: 20px;
+    cursor: pointer;
+}
+  
+.User-biography {
+    position: absolute;
+    top: 240px;
+    right: 370px;
+    font-size: 20px;
+    width: 450px;
+    height: 100px;
+    text-align: left;
+} 
+
+.Follower-block {
+    display: none;
+}
+
+.Following-block {
+    display: none;
+}
+
+.Close-icon {
+    position: absolute;
+    top:  10px;
+    right: 10px;
+    cursor: pointer;
+}

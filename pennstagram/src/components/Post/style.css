@@ -1,0 +1,19 @@
+.rightBox {
+    margin : 0 10%!important;
+    overflow: auto;
+}
+
+.captionBox {
+    margin-top: 5%;
+    max-height: 100%;
+    /*height: 100%;*/
+    border-bottom: 1px solid #efefef;
+    overflow: auto;
+}
+.captionEdit {
+    width : 100%
+}
+.captionEditButton {
+    display: block;
+    float : right;
+}

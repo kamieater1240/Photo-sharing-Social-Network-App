@@ -1,0 +1,19 @@
+{
+  "name": "pennstagram",
+  "version": "1.0.0",
+  "description": "Pennstagram Root",
+  "main": "index.js",
+  "scripts": {
+    "start" : "cd backend && npm install && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cis557/project---design-hw1-group-22.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cis557/project---design-hw1-group-22/issues"
+  },
+  "homepage": "https://github.com/cis557/project---design-hw1-group-22#readme"
+}
